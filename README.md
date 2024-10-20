@@ -33,23 +33,22 @@ Running the Application
     http://localhost:3000
 
 ## Project Structure
-
-    "    jellybean-app/
+    jellybean-app/
     ├── client/
     │   └── index.html
     └── server/
-        └── server.js"
+        └── server.js
 
 ## API Endpoints
-- **POST** /flavors: Add a new flavor
-        Request body: { "name": "Flavor Name" }
-        Response: { "id": 1, "name": "Flavor Name" }
+**POST** /flavors: Add a new flavor
+- Request body: { "name": "Flavor Name" }
+- Response: { "id": 1, "name": "Flavor Name" }
 - **GET** /flavors: View all flavors
-        Response: [ { "id": 1, "name": "Flavor Name" }, ... ]
+- Response: [ { "id": 1, "name": "Flavor Name" }, ... ]
 - **PUT** /flavors/:id: Update a flavor
-        Request body: { "name": "New Flavor Name" }
-        Response: { "id": 1, "name": "New Flavor Name" }
+- Request body: { "name": "New Flavor Name" }
+- Response: { "id": 1, "name": "New Flavor Name" }
 - **DELETE** /flavors/:id: Delete a flavor
-        Response: 204 No Content
+- Response: 204 No Content
 License
 This project is licensed under the MIT License.
