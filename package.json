@@ -1,0 +1,26 @@
+{
+  "name": "jellybean",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0captjack/jellybean.git"
+  },
+  "keywords": [
+    "jellybean"
+  ],
+  "author": "0captjack",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0captjack/jellybean/issues"
+  },
+  "homepage": "https://github.com/0captjack/jellybean#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1"
+  }
+}
