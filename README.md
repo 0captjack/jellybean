@@ -32,23 +32,24 @@ Running the Application
 2. Open your browser and navigate to:
     http://localhost:3000
 
-Project Structure
-    jellybean-app/
-├── client/
-│   └── index.html
-└── server/
-    └── server.js
+## Project Structure
 
-API Endpoints
-    POST /flavors: Add a new flavor
+    "    jellybean-app/
+    ├── client/
+    │   └── index.html
+    └── server/
+        └── server.js"
+
+## API Endpoints
+- **POST** /flavors: Add a new flavor
         Request body: { "name": "Flavor Name" }
         Response: { "id": 1, "name": "Flavor Name" }
-    GET /flavors: View all flavors
+- **GET** /flavors: View all flavors
         Response: [ { "id": 1, "name": "Flavor Name" }, ... ]
-    PUT /flavors/:id: Update a flavor
+- **PUT** /flavors/:id: Update a flavor
         Request body: { "name": "New Flavor Name" }
         Response: { "id": 1, "name": "New Flavor Name" }
-    DELETE /flavors/:id: Delete a flavor
+- **DELETE** /flavors/:id: Delete a flavor
         Response: 204 No Content
 License
 This project is licensed under the MIT License.
