@@ -20,7 +20,7 @@ A simple web application to perform CRUD operations on jelly bean flavors.
 
    ```sh
    git clone https://github.com/0captjack/jellybean
-   cd jellybean-app
+   cd jellybean (go to the folder)
 
 2. Install the dependencies:
     npm install
