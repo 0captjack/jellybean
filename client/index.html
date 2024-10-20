@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jellybean Flavors</title>
+</head>
+<body>
+  <h1>Jellybean Flavors</h1>
+
+  <h2>Add a new flavor</h2>
+  <form id="addFlavorForm">
+    <input type="text" id="newFlavor" placeholder="Flavor name" required>
+    <button type="submit">Add Flavor</button>
+  </form>
+
+  <h2>Existing flavors</h2>
+  <ul id="flavorList"></ul>
+
+  <script>
+    const flavorList = document.getElementById('flavorList');
+    const addFlavorForm = document.getElementById('addFlavorForm');
+    const newFlavorInput = document.getElementById('newFlavor');
+
+    async function fetchFlavors() {
+      const response = await fetch('/flavors');
+      const flavors = await response.json();
+      flavorList.innerHTML = '';
+      flavors.forEach(flavor => {
+        const li = document.createElement('li');
+        li.textContent = flavor.name;
+        li.dataset.id = flavor.id;
+        li.appendChild(createUpdateButton(flavor.id));
+        li.appendChild(createDeleteButton(flavor.id));
+        flavorList.appendChild(li);
+      });
+    }
+
+    function createUpdateButton(id) {
+      const button = document.createElement('button');
+      button.textContent = 'Update';
+      button.onclick = async () => {
+        const newName = prompt('Enter new flavor name:');
+        if (newName) {
+          await fetch(`/flavors/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: newName })
+          });
+          fetchFlavors();
+        }
+      };
+      return button;
+    }
+
+    function createDeleteButton(id) {
+      const button = document.createElement('button');
+      button.textContent = 'Delete';
+      button.onclick = async () => {
+        await fetch(`/flavors/${id}`, { method: 'DELETE' });
+        fetchFlavors();
+      };
+      return button;
+    }
+
+    addFlavorForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const newFlavor = newFlavorInput.value;
+      await fetch('/flavors', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newFlavor })
+      });
+      newFlavorInput.value = '';
+      fetchFlavors();
+    };
+
+    fetchFlavors();
+  </script>
+</body>
+</html>
