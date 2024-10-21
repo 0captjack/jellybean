@@ -146,10 +146,28 @@
       return button;
     }
 
+// Add validation to check if flavor name is a duplicate
+//
+//    async function isDuplicateFlavor(name) {
+//       const response = await fetch('/flavors');
+//       const flavors = await response.json();
+//       return flavors.some(flavor => flavor.name.toLowerCase() === name.trim().toLowerCase());
+//    }
+
+    //Added some simple validation so you can't just submit spaces
+    function validateFlavorName(name) {
+      return name.trim().length > 0;
+    }
+
     addFlavorForm.onsubmit = async (e) => {
       e.preventDefault();
       const newFlavor = newFlavorInput.value;  // Get the inputted value
       
+      if (!validateFlavorName(newFlavor)) {
+        alert('Please enter a valid flavor name');
+        return;
+      }
+
       // Send POST request
       await fetch('/flavors', {
         method: 'POST',
