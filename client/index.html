@@ -9,6 +9,8 @@
   <h1>Jellybean Flavors</h1>
 
   <h2>Add a new flavor</h2>
+
+  <!-- Add a new flavor form -->
   <form id="addFlavorForm">
     <input type="text" id="newFlavor" placeholder="Flavor name" required>
     <button type="submit">Add Flavor</button>
@@ -22,16 +24,26 @@
     const addFlavorForm = document.getElementById('addFlavorForm');
     const newFlavorInput = document.getElementById('newFlavor');
 
-    async function fetchFlavors() {
+    async function fetchAllFlavors() {
+      //HTTP request to the /flavors endpoint
       const response = await fetch('/flavors');
-      const flavors = await response.json();
-      flavorList.innerHTML = '';
+      const flavors = await response.json();  // Parse the JSON response
+      flavorList.innerHTML = '';  // Clear the flavor list so you don't have dupes
+
+      // Loop through each flavor and give it a list element
       flavors.forEach(flavor => {
         const li = document.createElement('li');
         li.textContent = flavor.name;
-        li.dataset.id = flavor.id;
-        li.appendChild(createUpdateButton(flavor.id));
-        li.appendChild(createDeleteButton(flavor.id));
+        li.dataset.id = flavor.id;  // Store the ID in case I need it for Update/Delete
+        
+        const updateButton = createUpdateButton(flavor.id);
+        updateButton.style.marginLeft = '20px';
+
+        const deleteButton = createDeleteButton(flavor.id);
+        deleteButton.style.marginLeft = '2px';
+
+        li.appendChild(updateButton);  // Add update button
+        li.appendChild(deleteButton);  // Add delete button
         flavorList.appendChild(li);
       });
     }
@@ -39,15 +51,17 @@
     function createUpdateButton(id) {
       const button = document.createElement('button');
       button.textContent = 'Update';
+
       button.onclick = async () => {
-        const newName = prompt('Enter new flavor name:');
+        const newName = prompt('Enter new flavor name:');  // Prompt user for new flavor name
         if (newName) {
+          // Send PUT request
           await fetch(`/flavors/${id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' },  // Specify JSON content
             body: JSON.stringify({ name: newName })
           });
-          fetchFlavors();
+          fetchAllFlavors();  // Refresh flavor list after updating
         }
       };
       return button;
@@ -56,26 +70,31 @@
     function createDeleteButton(id) {
       const button = document.createElement('button');
       button.textContent = 'Delete';
+
       button.onclick = async () => {
+        // Send DELETE request
         await fetch(`/flavors/${id}`, { method: 'DELETE' });
-        fetchFlavors();
+        fetchAllFlavors();  // Refresh the flavor list
       };
       return button;
     }
 
     addFlavorForm.onsubmit = async (e) => {
       e.preventDefault();
-      const newFlavor = newFlavorInput.value;
+      const newFlavor = newFlavorInput.value;  // Get the inputted value
+      
+      // Send POST request
       await fetch('/flavors', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: newFlavor })
       });
-      newFlavorInput.value = '';
-      fetchFlavors();
+
+      newFlavorInput.value = '';  // Clear input field after submission
+      fetchAllFlavors();  // Refresh flavor list
     };
 
-    fetchFlavors();
+    fetchAllFlavors();
   </script>
 </body>
 </html>
