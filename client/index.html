@@ -4,13 +4,80 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jellybean Flavors</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li button {
+      background-color: #28a745;
+      margin-left: 10px;
+    }
+
+    li button:last-child {
+      background-color: #dc3545;
+    }
+
+    li button:hover {
+      opacity: 0.9;
+    }
+  </style>
+
 </head>
 <body>
   <h1>Jellybean Flavors</h1>
 
   <h2>Add a new flavor</h2>
 
-  <!-- Add a new flavor form -->
+  <!-- 'Add a Flavor' form -->
   <form id="addFlavorForm">
     <input type="text" id="newFlavor" placeholder="Flavor name" required>
     <button type="submit">Add Flavor</button>
